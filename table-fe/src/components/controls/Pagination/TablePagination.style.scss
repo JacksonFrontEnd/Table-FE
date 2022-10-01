@@ -1,0 +1,14 @@
+.custom-table {
+  &__pagination {
+    display: flex;
+    gap: 25px;
+    ul {
+      margin-bottom: 0;
+    }
+
+    .select-perpage {
+      min-width: 70px;
+      margin-left: 10px;
+    }
+  }
+}
