@@ -130,7 +130,7 @@ const SpaTable = ({ rows }) => {
   };
 
   const useResetFilterHandler = () => {
-    dispatch(resetFilter());
+    setLocalTableData(tableData);
   };
   return (
     <Table striped bordered hover>
