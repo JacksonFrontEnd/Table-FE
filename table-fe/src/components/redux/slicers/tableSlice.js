@@ -27,39 +27,6 @@ export const tableSlice = createSlice({
     setSelectedValue: (state, action) => {
       state.selectedValue = action.payload;
     },
-
-    filterTable: (state) => {
-      /*switch (state.selectedSettings) {
-        case "Equal":
-          console.log("state.tableData", state.tableData);
-          state.filtredTableData = state.tableData.filter(
-            (el) => String(el.selectedColumn) === String(state.selectedValue)
-          );
-          console.log("state.filtredTableData", state.filtredTableData);
-          break;
-        case "Include":
-          state.filtredTableData = state.tableData.filter((el) =>
-            String(el.selectedColumn).includes(String(state.selectedValue))
-          );
-          break;
-        case "More":
-          state.filtredTableData = state.tableData.filter(
-            (el) => String(el.selectedColumn) >= String(state.selectedValue)
-          );
-          break;
-        case "Less":
-          state.filtredTableData = state.tableData.filter(
-            (el) => String(el.selectedColumn) <= String(state.selectedValue)
-          );
-          break;
-        default:
-          state.filtredTableData = state.tableData;
-          break;
-      }*/
-    },
-    resetFilter: (state) => {
-      state.filtredTableData = state.tableData;
-    },
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -76,8 +43,6 @@ export const {
   setSelectedColumn,
   setSelectedSettings,
   setSelectedValue,
-  filterTable,
-  resetFilter,
 } = tableSlice.actions;
 
 export default tableSlice.reducer;

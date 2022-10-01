@@ -9,8 +9,6 @@ import {
   setSelectedValue,
   setSelectedSettings,
   setSelectedColumn,
-  filterTable,
-  resetFilter,
 } from "../redux/slicers/tableSlice";
 import "./spaTable.styles.scss";
 import { columns, settings, dropdownColumns } from "../constants/constants";
@@ -24,7 +22,6 @@ const SpaTable = ({ rows }) => {
   const { items, requestSort, sortConfig } = useSort(localTableData);
 
   const dispatch = useDispatch();
-  // const filtredTableData = useSelector((state) => state.table.filtredTableData);
 
   const tableData = useSelector((state) => state.table.tableData);
 
@@ -83,45 +80,54 @@ const SpaTable = ({ rows }) => {
     ].join("/");
   };
   const useApplyFilterHandler = () => {
-    console.log("selectedColumn", selectedColumn);
-    console.log("selectedSettings", selectedSettings);
-    console.log("selectedValue", selectedValue);
-    console.log("tableData", tableData);
+    let resArr;
     switch (selectedSettings) {
       case "Equal":
-        setLocalTableData(
-          tableData.filter((el) => {
-            console.log(
-              "el.selectedColumn",
-              String(el[selectedColumn]) === String(selectedValue)
-            );
-            return String(el[selectedColumn]) === String(selectedValue);
-          })
-        );
+        resArr = tableData.filter((el) => {
+          return String(el[selectedColumn]) === String(selectedValue);
+        });
+        if (resArr.length === 0) {
+          setIsNoResult(true);
+        } else {
+          setIsNoResult(false);
+          setLocalTableData(resArr);
+        }
+
         setPageSize((prevState) => prevState);
         break;
       case "Include":
-        setLocalTableData(
-          tableData.filter((el) =>
-            String(el[selectedColumn]).includes(String(selectedValue))
-          )
+        resArr = tableData.filter((el) =>
+          String(el[selectedColumn]).includes(String(selectedValue))
         );
+        if (resArr.length === 0) {
+          setIsNoResult(true);
+        } else {
+          setIsNoResult(false);
+          setLocalTableData(resArr);
+        }
         setPageSize((prevState) => prevState);
         break;
       case "More":
-        setLocalTableData(
-          tableData.filter(
-            (el) => String(el[selectedColumn]) >= String(selectedValue)
-          )
+        resArr = tableData.filter(
+          (el) => String(el[selectedColumn]) >= String(selectedValue)
         );
+        if (resArr.length === 0) {
+          setIsNoResult(true);
+        } else {
+          setIsNoResult(false);
+          setLocalTableData(resArr);
+        }
         setPageSize((prevState) => prevState);
         break;
       case "Less":
-        setLocalTableData(
-          tableData.filter(
-            (el) => String(el[selectedColumn]) <= String(selectedValue)
-          )
+        resArr = tableData.filter(
+          (el) => String(el[selectedColumn]) <= String(selectedValue)
         );
+        if (resArr.length === 0) {
+          setIsNoResult(true);
+        } else {
+          setLocalTableData(resArr);
+        }
         setPageSize((prevState) => prevState);
         break;
       default:
