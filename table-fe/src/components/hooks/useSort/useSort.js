@@ -20,6 +20,7 @@ const useSort = (items, config = null) => {
   }, [items, sortConfig]);
 
   const requestSort = (key) => {
+    // specifying sorting configuration
     let direction = "ascending";
     if (
       sortConfig &&

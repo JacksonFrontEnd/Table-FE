@@ -4,7 +4,7 @@ const Dropdown = ({ content, dispatch, func }) => {
   const [value, setValue] = useState(content[0]);
   useEffect(() => {
     dispatch(func(value));
-  }, [value]);
+  }, [value]); //filter Dropdown Menu
   const options = content.map((text, index) => {
     return <option key={index}>{text}</option>;
   });

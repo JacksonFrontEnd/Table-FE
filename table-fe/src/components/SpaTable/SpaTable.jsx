@@ -39,6 +39,7 @@ const SpaTable = ({ rows }) => {
   }, [currentPage, pageSize]);
 
   useEffect(() => {
+    // adding data to storage
     dispatch(setFiltredData(items));
     dispatch(setTableData(items));
     setLocalTableData(items);
@@ -53,6 +54,7 @@ const SpaTable = ({ rows }) => {
   }, [pageSize]);
 
   useMemo(() => {
+    //drawing the number of table rows
     const firstPageIndex = (currentPage - 1) * pageSize;
     const lastPageIndex = firstPageIndex + pageSize;
 
@@ -73,13 +75,16 @@ const SpaTable = ({ rows }) => {
   };
 
   const formatDate = (date) => {
+    //date converter
+    console.log("date", date);
     return [
-      padTo2Digits(date.getDate()),
-      padTo2Digits(date.getMonth() + 1),
       date.getFullYear(),
-    ].join("/");
+      padTo2Digits(date.getMonth() + 1),
+      padTo2Digits(date.getDate()),
+    ].join("-");
   };
   const useApplyFilterHandler = () => {
+    //Filter algorithm
     let resArr;
     switch (selectedSettings) {
       case "Equal":
@@ -166,7 +171,7 @@ const SpaTable = ({ rows }) => {
           return (
             <tr key={id + 1}>
               <td>{id + 1}</td>
-              <td>{formatDate(row.date)}</td>
+              <td>{formatDate(new Date(row.date))}</td>
               <td>{row.name}</td>
               <td>{row.count}</td>
               <td>{row.distance}</td>

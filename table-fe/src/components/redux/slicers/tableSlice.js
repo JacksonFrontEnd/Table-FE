@@ -9,6 +9,7 @@ const initialState = {
 };
 
 export const tableSlice = createSlice({
+  //adding actions to work with storage
   name: "tableStore",
   initialState,
   reducers: {
